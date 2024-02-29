@@ -40,6 +40,10 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
+	// endpoint healt
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "Hello World"})
+	})
 	router.GET("/lock/:id", lockHandler)
 
 	router.Run(":8080")
