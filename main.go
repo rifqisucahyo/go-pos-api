@@ -29,14 +29,14 @@ func initRedis() {
 	// Create a Pool with go-redis and use it
 	pool := goredis.NewPool(redisClient)
 	rs = redsync.New(pool)
-
-	// Message content
-	message := "\n********************************************************** \n* Welcome to the Go Program for CEWS!.\n**********************************************************\n\n\n\n"
-	fmt.Println(message)
 }
 
 func main() {
 	// initRedis()
+
+	// Message content
+        message := "\n********************************************************** \n* Welcome to the Go Program for CEWS>"
+	fmt.Println(message)
 
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
