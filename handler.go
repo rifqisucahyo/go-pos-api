@@ -37,9 +37,9 @@ func addIncrement(val string) (valInt int, err error) {
 func lockHandler(c *gin.Context) {
 	id := c.Param("id")
 
-	// set expiration time
-	expiration := 10 * time.Second
-	key := "transactionLock"
+	// // set expiration time
+	// expiration := 10 * time.Second
+	// key := "transactionLock"
 
 	// // lock with redis only
 	// err := lockTrxRedisOnly(key, expiration)
@@ -48,12 +48,12 @@ func lockHandler(c *gin.Context) {
 	// 	return
 	// }
 
-	// lock transaction with redsync
-	mutex, err := lockTrx(key, expiration)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "There are other processes in progress, please try again later"})
-		return
-	}
+	// // lock transaction with redsync
+	// mutex, err := lockTrx(key, expiration)
+	// if err != nil {
+	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": "There are other processes in progress, please try again later"})
+	// 	return
+	// }
 
 	// get redis
 	valExist, err := get(ctx, keyIncrement)
@@ -76,11 +76,11 @@ func lockHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Transaction locked", "value": val})
-	defer func() {
-		// Pastikan untuk membuka kunci saat selesai
-		err := unlockTrx(*mutex)
-		if err != nil {
-			fmt.Println("Error unlocking transaction:", err)
-		}
-	}()
+	// defer func() {
+	// 	// Pastikan untuk membuka kunci saat selesai
+	// 	err := unlockTrx(*mutex)
+	// 	if err != nil {
+	// 		fmt.Println("Error unlocking transaction:", err)
+	// 	}
+	// }()
 }

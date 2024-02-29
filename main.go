@@ -36,7 +36,7 @@ func initRedis() {
 }
 
 func main() {
-	initRedis()
+	// initRedis()
 
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
